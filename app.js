@@ -1,6 +1,5 @@
 var http = require("http");
 var fs = require("fs");
-var fs = require("fs");
 
 http.createServer(function(request, response) {
 
@@ -30,6 +29,12 @@ http.createServer(function(request, response) {
 
         console.log("reading my_secrets...");
         var data = fs.readFileSync('my_secrets.json');
+
+        // simulate large file size / many users ....
+        var seconds = 10;
+        var waitTill = new Date(new Date().getTime() + seconds * 1000);
+        while (waitTill > new Date()) {}
+
         console.log("got my_secrets!");
 
         response.end(data.toString());
